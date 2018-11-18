@@ -21,12 +21,12 @@ bool check(Route & expected,RailSystem &rs)
 int main(int argc, char* argv[]) 
 {
 
-    try 
+    try
     {
 
         RailSystem rs("../../res/services.txt");
-        
-        while (true) 
+
+        while (true)
         {
 
             cout << "\n\nEnter a start and destination city:  ('quit' to exit)\n";
@@ -36,11 +36,11 @@ int main(int argc, char* argv[])
             if (from == "quit") break;
             cin >> to;
 
-            if (rs.is_valid_city(from) && rs.is_valid_city(to)) 
+            if (rs.is_valid_city(from) && rs.is_valid_city(to))
             {
                 rs.output_cheapest_route(from, to);
             }
-            else 
+            else
             {
                 cout << "Please enter valid cities\n\n";
             }
@@ -50,11 +50,11 @@ int main(int argc, char* argv[])
         return EXIT_SUCCESS;
 
     }
-    catch (exception& e) 
+    catch (exception& e)
     {
         cout << e.what() << endl;
     }
-    catch (...) 
+    catch (...)
     {
         cout << "Unknown exception caught\n";
     }

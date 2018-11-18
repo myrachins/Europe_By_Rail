@@ -56,12 +56,15 @@ struct Route
 
 class RailSystem
 {
-protected:
+public:
     std::map<std::string, std::list<Service*> > outgoing_services;
     std::map<std::string, City*> cities;
     
     /// Throws std::logic_error in case of incorrect file.
     void load_services(const std::string& filename);
+
+    void add_service(const std::string& line);
+    void add_city(const std::string& cityName);
 
     void reset();
 
@@ -80,7 +83,7 @@ public:
 
     bool is_valid_city(const std::string& name);
 
-    /// For test only.  
+    /// For test only.
     Route getCheapestRoute(const std::string& from, const std::string& to);
 };
 
