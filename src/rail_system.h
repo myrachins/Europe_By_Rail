@@ -56,7 +56,7 @@ struct Route
 
 class RailSystem
 {
-public:
+protected:
     std::map<std::string, std::list<Service*> > outgoing_services;
     std::map<std::string, City*> cities;
     
@@ -72,6 +72,11 @@ public:
 
     /// Throws std::invalid_argument in case of invalid cities.
     std::pair<int, int> calc_route(std::string from, std::string to);
+
+    void initialization(std::string& startCity);
+    std::string findMinFromPick(std::string& cityName);
+    void relax(std::string& cityName);
+    void cityCheck(const std::string& cityName);
 
 public:
 
