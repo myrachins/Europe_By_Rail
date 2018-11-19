@@ -131,11 +131,11 @@ void RailSystem::initialization(std::string& start)
     {
         mapIter->second->total_fee = INT_MAX - 2;
         mapIter->second->total_distance = INT_MAX - 2;
+        mapIter->second->from_city = "";
     }
 
     cities[start]->total_fee = 0;
     cities[start]->total_distance = 0;
-    cities[start]->from_city = "";
     // marking start node
 }
 
