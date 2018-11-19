@@ -74,7 +74,7 @@ protected:
     std::pair<int, int> calc_route(std::string from, std::string to);
 
     void initialization(std::string& startCity);
-    std::string findMinFromPick(std::string& cityName);
+    std::string findMinCity();
     void relax(std::string& cityName);
     void cityCheck(const std::string& cityName);
 

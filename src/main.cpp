@@ -44,7 +44,6 @@ int main(int argc, char* argv[])
             {
                 cout << "Please enter valid cities\n\n";
             }
-
         }
 
         return EXIT_SUCCESS;

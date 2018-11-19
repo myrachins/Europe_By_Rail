@@ -100,20 +100,17 @@ std::pair<int, int> RailSystem::calc_route(std::string from, std::string to)
     cityCheck(to);
     initialization(from);
 
-    std::string currCityName = from;
-    std::pair<int, int> bestOption;
-
     while (true)
     {
+        std::string currCityName = findMinCity();
+        if(currCityName == "") break; // if all possible cities are visited but desired city wasn't reached
+
         relax(currCityName);
         if(currCityName == to) // if we relaxed desired node
         {
             City* lastCity = cities[currCityName];
             return std::pair<int, int>(lastCity->total_fee, lastCity->total_distance);
         }
-
-        currCityName = findMinFromPick(currCityName);
-        if(currCityName == "") break; // if all possible cities are visited but desired city wasn't reached
     }
 
     return std::pair<int, int>(INT_MAX, INT_MAX);
@@ -138,11 +135,11 @@ void RailSystem::initialization(std::string& start)
 
     cities[start]->total_fee = 0;
     cities[start]->total_distance = 0;
-    cities[start]->visited = true;
+    cities[start]->from_city = "";
     // marking start node
 }
 
-std::string RailSystem::findMinFromPick(std::string& cityName)
+std::string RailSystem::findMinCity()
 {
     std::string nearestCityName; // "" by default
     City* bestCity = nullptr;
@@ -151,7 +148,7 @@ std::string RailSystem::findMinFromPick(std::string& cityName)
     for(mapIter = cities.begin(); mapIter != cities.end(); ++mapIter)
     {
         City* currCity = mapIter->second;
-        if(!currCity->visited && (!bestCity || bestCity->total_fee > currCity->total_fee))
+        if(!currCity->visited && currCity->total_fee != INT_MAX && (!bestCity || bestCity->total_fee > currCity->total_fee))
         {
             bestCity = currCity;
             nearestCityName = bestCity->name;
