@@ -129,8 +129,9 @@ void RailSystem::initialization(std::string& start)
     std::map<std::string, City*>::iterator mapIter;
     for(mapIter = cities.begin(); mapIter != cities.end(); ++mapIter)
     {
-        mapIter->second->total_fee = INT_MAX - 2;
-        mapIter->second->total_distance = INT_MAX - 2;
+        mapIter->second->total_fee = INT_MAX;
+        mapIter->second->total_distance = INT_MAX;
+        mapIter->second->visited = false;
         mapIter->second->from_city = "";
     }
 
@@ -148,7 +149,7 @@ std::string RailSystem::findMinCity()
     for(mapIter = cities.begin(); mapIter != cities.end(); ++mapIter)
     {
         City* currCity = mapIter->second;
-        if(!currCity->visited && currCity->total_fee != INT_MAX - 2 && (!bestCity || bestCity->total_fee > currCity->total_fee))
+        if(!currCity->visited && currCity->total_fee != INT_MAX && (!bestCity || bestCity->total_fee > currCity->total_fee))
         {
             bestCity = currCity;
             nearestCityName = bestCity->name;
